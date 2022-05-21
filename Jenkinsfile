@@ -8,7 +8,7 @@ pipeline {
                       sh "rm -r helmweb12"
                   } catch (Exception e) {
                       build_ok = true
-                      git url: 'https://github.com/avivlev98/helmweb12.git'
+                      git url: 'git@github.com:avivlev98/helmweb12.git'
                       echo e.toString()
                   }
                 }
