@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('git repo & clean'){
             steps{
-                ## Trying to clone new changes from git, deleting exsisting files, if the files doesnt exsists i tell him to mark it as OK and clone the new ones.
+                // Trying to clone new changes from git, deleting exsisting files, if the files doesnt exsists i tell him to mark it as OK and clone the new ones.
                 script {
                   try {
                       sh "rm -r helmweb12"
@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Deploy Chart') {
             steps {
-                ## Connect to AKS check if the chart exsists so just upgrade it to the newer version, else create a new one.
+                // Connect to AKS check if the chart exsists so just upgrade it to the newer version, else create a new one.
                 kubeconfig(caCertificate: '', credentialsId: 'chartkube', serverUrl: 'https://devops-interview-0b426a9d.hcp.westeurope.azmk8s.io:443') {
                 // some block
                 sh '''
