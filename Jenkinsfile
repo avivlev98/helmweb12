@@ -30,7 +30,7 @@ pipeline {
                 
                     if [ $DEPLOYED == 0 ] ; then
                    
-                      cd /var/lib/jenkins/workspace/helmpipe/helmweb12/
+                      #cd /var/lib/jenkins/workspace/helmpipe/helmweb12/
                       helm install ${PACKAGE} ${CHART} -n $NAMESPACE
                       
                     else
