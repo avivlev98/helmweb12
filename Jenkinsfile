@@ -3,6 +3,7 @@ pipeline {
     stages {
       stage('git repo & clean'){
         steps {
+          // Trying to clone new changes from git, deleting exsisting files, if the files doesnt exsists i tell him to mark it as OK and clone the new ones.
           catchError {
             script {
               try {
@@ -28,7 +29,7 @@ pipeline {
             }
           }
         }
-      // Trying to clone new changes from git, deleting exsisting files, if the files doesnt exsists i tell him to mark it as OK and clone the new ones.
+      
                
         stage('Deploy Chart') {
           steps {
