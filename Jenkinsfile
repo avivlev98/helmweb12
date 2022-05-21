@@ -1,14 +1,14 @@
 pipeline {
     agent any 
     stages {
-        stage('git repo & clean'){
-          steps {
-            catchError {
-              script {
-                  try {
-                      sh "rm -r helmweb12"
-                      sh "rm -r webchart12"
-                      sh "git clone git@github.com:avivlev98/helmweb12.git"
+      stage('git repo & clean'){
+        steps {
+          catchError {
+            script {
+              try {
+                    sh "rm -r helmweb12"
+                    sh "rm -r webchart12"
+                    sh "git clone git@github.com:avivlev98/helmweb12.git"
                   } catch (Exception e) {
                       build_ok = true
                       sh "git clone git@github.com:avivlev98/helmweb12.git"
@@ -16,8 +16,9 @@ pipeline {
                   }
                 }
             }
-          post {
-            success {
+        }
+        post {
+          success {
               echo 'git repo & clean stage successful'
             }
             failure {
@@ -27,7 +28,7 @@ pipeline {
             }
           }
         }
-    }       // Trying to clone new changes from git, deleting exsisting files, if the files doesnt exsists i tell him to mark it as OK and clone the new ones.
+      // Trying to clone new changes from git, deleting exsisting files, if the files doesnt exsists i tell him to mark it as OK and clone the new ones.
                
         stage('Deploy Chart') {
           steps {
@@ -56,8 +57,9 @@ pipeline {
                 '''
             }
           }
-          post {
-            success {
+        }
+        post {
+          success {
               echo 'Deploy stage successful'
             }
             failure {
@@ -68,5 +70,5 @@ pipeline {
           }
         }
     }
- }
 }
+
