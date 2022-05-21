@@ -29,7 +29,7 @@ pipeline {
                 PACKAGE=avivwebchart12
                 
                 #cd /var/lib/jenkins/workspace/helmpipe/helmweb12/
-                DEPLOYED=$(helm list -n $NAMESPACE |grep -E "^${PACKAGE}" |grep DEPLOYED |wc -l)
+                DEPLOYED=$(helm list -n $NAMESPACE |grep -E "^${PACKAGE}" |grep deployed |wc -l)
                 
                     if [ $DEPLOYED -eq 0 ] ; then
                    
