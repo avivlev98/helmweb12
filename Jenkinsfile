@@ -2,9 +2,9 @@ pipeline {
     agent any 
     stages {
         stage('git repo & clean'){
-            steps{
-                // Trying to clone new changes from git, deleting exsisting files, if the files doesnt exsists i tell him to mark it as OK and clone the new ones.
-                script {
+          steps {
+            catchError {
+              script {
                   try {
                       sh "rm -r helmweb12"
                       sh "rm -r webchart12"
@@ -16,11 +16,24 @@ pipeline {
                   }
                 }
             }
+          post {
+            success {
+              echo 'git repo & clean stage successful'
+            }
+            failure {
+              echo 'Compile stage failed'
+              error('Stage is aborted due to failure of git repo & clean stage')
+
+            }
+          }
         }
+    }       // Trying to clone new changes from git, deleting exsisting files, if the files doesnt exsists i tell him to mark it as OK and clone the new ones.
+               
         stage('Deploy Chart') {
-            steps {
-                // Connect to AKS check if the chart exsists so just upgrade it to the newer version, else create a new one.
-                kubeconfig(caCertificate: '', credentialsId: 'chartkube', serverUrl: 'https://devops-interview-0b426a9d.hcp.westeurope.azmk8s.io:443') {
+          steps {
+            catchError {
+              // Connect to AKS check if the chart exsists so just upgrade it to the newer version, else create a new one.
+              kubeconfig(caCertificate: '', credentialsId: 'chartkube', serverUrl: 'https://devops-interview-0b426a9d.hcp.westeurope.azmk8s.io:443') {
                 // some block
                 sh '''
                 
@@ -41,9 +54,19 @@ pipeline {
                     fi
                     echo "deployed!"
                 '''
-                }
             }
-        
+          }
+          post {
+            success {
+              echo 'Deploy stage successful'
+            }
+            failure {
+              echo 'Deploy stage failed'
+              error('Deploy is aborted due to failure of deploy stage')
+
+            }
+          }
         }
     }
+ }
 }
