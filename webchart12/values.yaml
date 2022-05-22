@@ -53,6 +53,11 @@ ingress:
       paths:
         - path: /aviv
           pathType: ImplementationSpecific
+          backend:
+            service:
+              name: avivwebchart12-clusterip
+              port:
+                number: 80
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
