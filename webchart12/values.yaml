@@ -55,7 +55,7 @@ ingress:
           pathType: ImplementationSpecific
           backend:
             service:
-              name: avivwebchart12-clusterip
+              name: avivwebchart12cp
               port:
                 number: 80
   tls: []
