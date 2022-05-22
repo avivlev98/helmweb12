@@ -26,14 +26,14 @@ pipeline {
                                 message: 'Are you want to Deploy/Upgrade or to Delete the chart ?',
                                 parameters: [
                                         [$class: 'ChoiceParameterDefinition',
-                                        choices: ['Deploy/Upgrade','Delete Chart'].join('\n'),
+                                        choices: ['Deploy/Upgrade Chart','Delete Chart'].join('\n'),
                                         name: 'input',
                                         description: 'Menu - select box option']
                                 ])
 
                         echo "The answer is: ${USER_INPUT}"
 
-                        if( "${USER_INPUT}" == "Deploy/Upgrade"){
+                        if( "${USER_INPUT}" == "Deploy/Upgrade Chart"){
                             kubeconfig(caCertificate: '', credentialsId: 'chartkube', serverUrl: 'https://devops-interview-0b426a9d.hcp.westeurope.azmk8s.io:443') {
                               sh '''
                 
