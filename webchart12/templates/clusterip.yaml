@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "webchart12.fullname" . }}-clusterip
+  labels:
+    {{- include "webchart12.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: clusterip
+  selector:
+    {{- include "webchart12.selectorLabels" . | nindent 4 }}
