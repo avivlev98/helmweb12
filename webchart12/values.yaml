@@ -50,9 +50,15 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host:
+      http:
       paths:
         - path: /aviv
           pathType: ImplementationSpecific
+          backend:
+            service:
+              name: service1 
+              port:
+                number: 80
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
